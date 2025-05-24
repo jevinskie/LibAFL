@@ -28,6 +28,6 @@ libafl = {path = "../../libafl", version="0.8", default-features=false, features
 cmake = "0.1"
 bindgen = "0.61"
 regex = "1"
-lazy_static = "1.4"
-which = "4.2"
+lazy_static = "1.5"
+which = "4.4"
 symcc_libafl = {path = "../symcc_libafl", version="0.8"}

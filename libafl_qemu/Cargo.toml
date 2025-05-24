@@ -40,18 +40,18 @@ libafl_qemu_sys = { path = "./libafl_qemu_sys", version = "0.8.2" }
 serde = { version = "1.0", default-features = false, features = ["alloc"] } # serialization lib
 hashbrown =  { version = "0.12", features = ["serde", "ahash-compile-time-rng"] } # A faster hashmap, nostd compatible
 num-traits = "0.2"
-num_enum = "0.5.7"
-goblin = "0.5.3"
+num_enum = "0.5.11"
+goblin = "0.5.4"
 libc = "0.2"
 strum = "0.24"
 strum_macros = "0.24"
-syscall-numbers = "3.0"
+syscall-numbers = "3.1"
 meminterval = "0.3"
-thread_local = "1.1.4"
+thread_local = "1.1.8"
 capstone = "0.11.0"
 #pyo3 = { version = "0.15", features = ["extension-module"], optional = true }
 pyo3 = { version = "0.17", features = ["pyproto"], optional = true }
-rangemap = "1.0"
+rangemap = "1.5"
 
 [build-dependencies]
 pyo3-build-config = { version = "0.15", optional = true }
