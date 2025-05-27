@@ -107,6 +107,8 @@ typedef volatile struct {
   uint8_t  enabled[4];
 } kAFL_ranges;
 
+static inline uintptr_t kAFL_hypercall(uintptr_t p1, uintptr_t p2);
+
 #if defined(__i386__)
 static inline uint32_t kAFL_hypercall(uint32_t p1, uint32_t p2) {
   uint32_t nr = HYPERCALL_KAFL_RAX_ID;

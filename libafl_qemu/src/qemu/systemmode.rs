@@ -1,5 +1,5 @@
 use std::{
-    ffi::{CStr, CString, c_void},
+    ffi::{CStr, CString, c_void, c_char},
     marker::PhantomData,
     mem::MaybeUninit,
     ptr::null_mut,
@@ -70,13 +70,13 @@ impl DeviceSnapshotFilter {
         }
     }
 
-    fn devices(&self, v: &mut Vec<*mut i8>) -> *mut *mut i8 {
+    fn devices(&self, v: &mut Vec<*mut c_char>) -> *mut *mut c_char {
         v.clear();
         match self {
             DeviceSnapshotFilter::All => null_mut(),
             DeviceSnapshotFilter::AllowList(l) | DeviceSnapshotFilter::DenyList(l) => {
                 for name in l {
-                    v.push(name.as_bytes().as_ptr() as *mut i8);
+                    v.push(name.as_bytes().as_ptr() as *mut c_char);
                 }
                 v.push(core::ptr::null_mut());
                 v.as_mut_ptr()
