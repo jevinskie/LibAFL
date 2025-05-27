@@ -167,7 +167,7 @@ fn configure_qemu(
         .arg("--disable-mpath")
         .arg("--disable-multiprocess")
         .arg("--disable-netmap")
-        .arg("--disable-nettle")
+        .arg("--enable-nettle")
         .arg("--disable-numa")
         .arg("--disable-nvmm")
         .arg("--disable-opengl")
