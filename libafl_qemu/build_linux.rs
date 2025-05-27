@@ -221,7 +221,9 @@ pub fn build() {
 
         let mut make = Command::new("make");
         if cfg!(debug_assertions) {
-            make.env("CFLAGS", "-DDEBUG=1");
+            make.env("CFLAGS", "-DDEBUG=1 -Wno-unguarded-availability-new");
+        } else {
+            make.env("CFLAGS", "-Wno-unguarded-availability-new");
         }
         assert!(
             make.current_dir(&out_dir)

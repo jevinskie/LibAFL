@@ -402,12 +402,12 @@ pub fn build(
 
     let (output_lib, output_lib_link) = if is_usermode {
         (
-            libafl_qemu_build_dir.join(format!("libqemu-{cpu_target}.so")),
+            libafl_qemu_build_dir.join(format!("libqemu-{cpu_target}-unsigned.dylib")),
             format!("qemu-{cpu_target}"),
         )
     } else {
         (
-            libafl_qemu_build_dir.join(format!("libqemu-system-{cpu_target}.so")),
+            libafl_qemu_build_dir.join(format!("libqemu-system-{cpu_target}-unsigned.dylib")),
             format!("qemu-system-{cpu_target}"),
         )
     };
@@ -423,6 +423,12 @@ pub fn build(
         &cpu_target,
         &target_suffix,
     );
+
+    if cfg!(debug_assertions) {
+        config_cmd.env("CFLAGS", "-DDEBUG=1 -Wno-unguarded-availability-new");
+    } else {
+        config_cmd.env("CFLAGS", "-Wno-unguarded-availability-new");
+    }
 
     let current_config_signature = get_config_signature(&config_cmd);
     let must_reconfigure = if libafl_qemu_force_configure {
@@ -465,6 +471,7 @@ pub fn build(
         );
     }
 
+    println!("cargo:warning=output_lib: {}", output_lib.display());
     assert!(output_lib.is_file()); // Make sure this isn't very very wrong
 
     let compile_commands_string = &fs::read_to_string(libafl_qemu_build_dir.join("linkinfo.json"))
