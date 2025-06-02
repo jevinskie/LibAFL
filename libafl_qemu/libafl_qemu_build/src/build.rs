@@ -103,6 +103,10 @@ fn configure_qemu(
         cmd.arg("--enable-asan");
     }
 
+    cmd.arg("-extra-cflags=\"-Wno-error\"");
+    cmd.arg("-extra-cxxflags=\"-Wno-error\"");
+    cmd.arg("-Dwerror=false");
+
     if is_usermode {
         // Usermode options
         cmd.args(["--disable-fdt", "--disable-system", "--disable-docs"]);
